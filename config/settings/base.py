@@ -309,5 +309,5 @@ SPECTACULAR_SETTINGS = {
 
 # Cron entries
 CRONJOBS = [
-    ('*/1 * * * *', 'currency_prices.utils.fetch_price_and_store')
+    ('* * * * *', 'currency_prices.utils.fetch_price_and_store')
 ]
