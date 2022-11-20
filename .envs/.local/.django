@@ -6,3 +6,5 @@ IPYTHONDIR=/app/.ipython
 # ------------------------------------------------------------------------------
 VIRTUAL_HOST=crypto-tracker.local
 VIRTUAL_PORT=8000
+# DATABASE
+DATABASE_URL=postgres://ohNxEHvrpzewQMYoBMVAFAYLwqLlslbq:I449GE6s4MNZhMADQZfECEUBEmGc6IfTCN9PxQlAdSuP4CGhNM0qEeIe4JXNAKZn@postgres:5432/crypto_tracker
