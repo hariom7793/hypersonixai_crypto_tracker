@@ -1,4 +1,4 @@
-import requests
+import requests, json
 from datetime import datetime
 from .models import Currency, PriceHistory
 
@@ -11,7 +11,7 @@ def fetch_data(url, params=None):
 def fetch_price_and_store():
     active_currencies = Currency.objects.filter(active=True).values_list('code', flat=True)
     params = {
-        'symbols': [','.join(active_currencies)]
+        'symbols': json.dumps(list(active_currencies)).replace(' ', '')
     }
     response = fetch_data('https://api.binance.com/api/v3/ticker/price', params=params)
     for prices in response:
