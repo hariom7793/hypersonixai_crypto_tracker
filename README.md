@@ -11,6 +11,45 @@ License: MIT
 
 Moved to [settings](http://cookiecutter-django.readthedocs.io/en/latest/settings.html).
 
+## Project Overview
+
+This project is developed on the boilerplate provided by cookiecutter django template app.
+Main application (crypto_tracker directory) of this project is
+ - To fetch different crypto currency prices in USD (using endpoint https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#symbol-price-ticker) every minute and store it.
+ - To provide RESTful APIs to access the stored data.
+    - Get list of actively monitored currencies (/api/currencies/)
+    - Get prices in paginated format for a given date in DD-MM-YYYY format (/api/price_history?date=20-11-2022)
+    [Below are yet to included]
+    - Get current price for all crypto currencies monitored
+    - Get min, max price ranges for the day or any given date in DD-MM-YYYY
+    - API to input "Price Range", "Email Address", and "Currency Name" from users
+ [Below features are yet to included]
+ - Send email alerts to registered users when currency price moves out of range.
+
+### How to run this application locally
+ - Make sure to install, docker, docker-compose
+ - Clone this repository and build images using  `docker-compose -f local.yml build`
+ - Run application using `docker-compose -f local.yml up -d`
+ - Apply migrations using `docker-compose -f local.yml exec django ./manage.py migrate`
+ - Setup cronjobs using `docker-compose -f local.yml exec django ./manage.py setup`
+ - Add crontab entry so that job runs automatically at scheduled time using `docker-compose -f local.yml exec django ./manage.py crontab add` (Refer https://pypi.org/project/django-crontab/)
+
+### Known Issues:
+ - nginx reverse proxy setup not complete
+ - django-crontab setup not complete
+
+### Future Improvements:
+ - Infra level
+    - Scalability using microservices
+    - CI/CD pipeline
+ - App level
+    - Authentication mechanism
+    - Exception Handling
+    - Logging
+    - Rate limit handling for the currency api used to pull data and store
+    - Unit Tests
+    - API Documentation
+
 ## Basic Commands
 
 ### Setting Up Your Users
@@ -29,7 +68,7 @@ Running type checks with mypy:
 
     $ mypy crypto_tracker
 
-### Test coverage
+### Test coverage [Yet to be implemented]
 
 To run the tests, check your test coverage, and generate an HTML coverage report:
 
@@ -45,7 +84,7 @@ To run the tests, check your test coverage, and generate an HTML coverage report
 
 Moved to [Live reloading and SASS compilation](https://cookiecutter-django.readthedocs.io/en/latest/developing-locally.html#sass-compilation-live-reloading).
 
-## Deployment
+## Deployment [Yet to be refined]
 
 The following details how to deploy this application.
 
