@@ -1,17 +1,28 @@
 version: '3'
 
 volumes:
-  crypto_tracker_local_postgres_data: {}
-  crypto_tracker_local_postgres_data_backups: {}
+  ct_db_data: {}
+  ct_db_data_backups: {}
 
 services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy:alpine
+    container_name: ct_nginx
+    ports:
+      - "80:80"
+      # - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      # - ./certs:/etc/nginx/certs
+    restart: always
+    depends_on:
+      - django
   django:
     build:
       context: .
       dockerfile: ./compose/local/django/Dockerfile
-    image: crypto_tracker_local_django
-    container_name: crypto_tracker_local_django
-    platform: linux/x86_64
+    image: ct_app
+    container_name: ct_app
     depends_on:
       - postgres
     volumes:
@@ -28,17 +39,16 @@ services:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
     image: crypto_tracker_production_postgres
-    container_name: crypto_tracker_local_postgres
+    container_name: ct_db
     volumes:
-      - crypto_tracker_local_postgres_data:/var/lib/postgresql/data:Z
-      - crypto_tracker_local_postgres_data_backups:/backups:z
+      - ct_db_data:/var/lib/postgresql/data:Z
+      - ct_db_data_backups:/backups:z
     env_file:
       - ./.envs/.local/.postgres
 
   docs:
-    image: crypto_tracker_local_docs
-    container_name: crypto_tracker_local_docs
-    platform: linux/x86_64
+    image: ct_docs
+    container_name: ct_docs
     build:
       context: .
       dockerfile: ./compose/local/docs/Dockerfile
