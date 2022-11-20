@@ -9,6 +9,7 @@ def fetch_data(url, params=None):
 
 
 def fetch_price_and_store():
+    print('*'*10, 'Fetching data and storing', '*'*10)
     active_currencies = Currency.objects.filter(active=True).values_list('code', flat=True)
     params = {
         'symbols': json.dumps(list(active_currencies)).replace(' ', '')
@@ -20,3 +21,4 @@ def fetch_price_and_store():
             currency=Currency.objects.get(code=prices['symbol']),
             price=prices['price']
         )
+    print('*'*10, 'Done fetching data and storing', '*'*10)
