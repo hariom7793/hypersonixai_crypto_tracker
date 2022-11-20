@@ -10,5 +10,5 @@ class Currency(models.Model):
 
 class PriceHistory(models.Model):
     date = models.DateTimeField()
-    currency = models.ForeignKey(Currency, on_delete=models.DO_NOTHING)
+    currency = models.ForeignKey(Currency, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=12, decimal_places=2)

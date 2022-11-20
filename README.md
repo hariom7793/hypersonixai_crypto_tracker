@@ -31,12 +31,11 @@ Main application (crypto_tracker directory) of this project is
  - Clone this repository and build images using  `docker-compose -f local.yml build`
  - Run application using `docker-compose -f local.yml up -d`
  - Apply migrations using `docker-compose -f local.yml exec django ./manage.py migrate`
- - Setup cronjobs using `docker-compose -f local.yml exec django ./manage.py setup`
  - Add crontab entry so that job runs automatically at scheduled time using `docker-compose -f local.yml exec django ./manage.py crontab add` (Refer https://pypi.org/project/django-crontab/)
 
 ### Known Issues:
  - nginx reverse proxy setup not complete
- - django-crontab setup not complete
+ - django-crontab setup completed but cron job not running. Need to debug.
 
 ### Future Improvements:
  - Infra level
