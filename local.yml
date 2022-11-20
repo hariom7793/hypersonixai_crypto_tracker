@@ -46,18 +46,18 @@ services:
     env_file:
       - ./.envs/.local/.postgres
 
-  docs:
-    image: ct_docs
-    container_name: ct_docs
-    build:
-      context: .
-      dockerfile: ./compose/local/docs/Dockerfile
-    env_file:
-      - ./.envs/.local/.django
-    volumes:
-      - ./docs:/docs:z
-      - ./config:/app/config:z
-      - ./crypto_tracker:/app/crypto_tracker:z
-    ports:
-      - "9000:9000"
-    command: /start-docs
+  # docs:
+  #   image: ct_docs
+  #   container_name: ct_docs
+  #   build:
+  #     context: .
+  #     dockerfile: ./compose/local/docs/Dockerfile
+  #   env_file:
+  #     - ./.envs/.local/.django
+  #   volumes:
+  #     - ./docs:/docs:z
+  #     - ./config:/app/config:z
+  #     - ./crypto_tracker:/app/crypto_tracker:z
+  #   ports:
+  #     - "9000:9000"
+  #   command: /start-docs
