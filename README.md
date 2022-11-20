@@ -47,6 +47,7 @@ Main application (crypto_tracker directory) of this project is
     - Exception Handling
     - Logging
     - Rate limit handling for the currency api used to pull data and store
+    - Coding standard checks/corrections
     - Unit Tests
     - API Documentation
 
